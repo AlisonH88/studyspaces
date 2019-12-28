@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Welcome
+{% endblock %}
+
+{% block main %}
+
+    <h2>Welcome, {{ name }}!</h2>
+    <br>
+    <h3>Let's get started.</h3>
+    <br>
+    <h5>
+        <div class="w3-container">
+            <div class="w3-light-grey w3-round-xlarge">
+                <div id="myBar" class="w3-container w3-blue w3-round-xlarge" style="width:0%">0%
+                </div>
+            </div>
+        </div>
+    </h5>
+    <br>
+    <h2>What noise level are you looking to study in?</h2>
+    <br>
+    <form action="/noise" method="post">
+        <div class="form-group">
+            <select class="form-control" name="noise">
+                <option disabled selected value="">Noise Level</option>
+
+                        <option>Quiet</option>
+                        <option>Moderate</option>
+                        <option>Loud</option>
+
+            </select>
+
+        <button class="btn btn-primary w3-button w3-blue" onclick="move()" type="submit">OK!</button>
+    </form>
+    <script>
+        function move() {
+            var elem = document.getElementById("myBar");
+            var width = 0;
+            var id = setInterval(frame, 10);
+            function frame() {
+                if (width >= 25) {
+                    clearInterval(id);
+                }
+                else {
+                    width++;
+                    elem.style.width = width + '%';
+                    elem.innerHTML = width * 1  + '%';
+                }
+            }
+        }
+    </script>
+
+{% endblock %}
+

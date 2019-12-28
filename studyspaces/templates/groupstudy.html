@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Group Study
+{% endblock %}
+
+{% block main %}
+
+    <h3>You {{ groupstudyoption }} want a group study space.</h3>
+    <br>
+    <h5>
+        <div class="w3-container">
+            <div class="w3-light-grey w3-round-xlarge">
+                <div id="myBar" class="w3-container w3-blue w3-round-xlarge" style="width:75%">75%
+                </div>
+            </div>
+        </div>
+    </h5>
+    <br>
+    <h2>Would you like food options within your space?</h2>
+    <br>
+    <form action="/food" method="post">
+        <div class="form-group">
+            <select class="form-control" name="food">
+                <option disabled selected value="">Food Availability</option>
+
+                        <option>Yes</option>
+                        <option>No</option>
+
+            </select>
+
+        <button class="btn btn-primary w3-button w3-blue" onclick="move()" type="submit">OK!</button>
+    </form>
+    <script>
+        function move() {
+            var elem = document.getElementById("myBar");
+            var width = 75;
+            var id = setInterval(frame, 10);
+            function frame() {
+                if (width >= 100) {
+                    clearInterval(id);
+                }
+                else {
+                    width++;
+                    elem.style.width = width + '%';
+                    elem.innerHTML = width * 1  + '%';
+                }
+            }
+        }
+    </script>
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Noise Level
+{% endblock %}
+
+{% block main %}
+
+    <h3>Your preferred noise level is {{ noise }}.</h3>
+    <br>
+    <h5>
+        <div class="w3-container">
+            <div class="w3-light-grey w3-round-xlarge">
+                <div id="myBar" class="w3-container w3-blue w3-round-xlarge" style="width:25%">25%
+                </div>
+            </div>
+        </div>
+    </h5>
+    <br>
+    <h2>What type of seating are you looking for?</h2>
+    <br>
+    <form action="/seating" method="post">
+        <div class="form-group">
+            <select class="form-control" name="seating">
+                <option disabled selected value="">Seating</option>
+
+                        <option>Couches</option>
+                        <option>Normal Chairs</option>
+                        <option>Rolling Chairs</option>
+
+            </select>
+        <button class="btn btn-primary w3-button w3-blue" onclick="move()" type="submit">OK!</button>
+    </form>
+
+    <script>
+        function move() {
+            var elem = document.getElementById("myBar");
+            var width = 25;
+            var id = setInterval(frame, 10);
+            function frame() {
+                if (width >= 50) {
+                    clearInterval(id);
+                }
+                else {
+                    width++;
+                    elem.style.width = width + '%';
+                    elem.innerHTML = width * 1  + '%';
+                }
+            }
+        }
+    </script>
+
+{% endblock %}
+

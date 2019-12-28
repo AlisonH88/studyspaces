@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Food Availability
+{% endblock %}
+
+{% block main %}
+
+    <h3>You {{ foodoption }} want food options within your space.</h3>
+    <br>
+    <h5>
+        <div class="w3-container">
+            <div class="w3-light-grey w3-round-xlarge">
+                <div id="myBar" class="w3-container w3-blue w3-round-xlarge" style="width:100%">100%
+                </div>
+            </div>
+        </div>
+    </h5>
+    <br>
+
+    <form action="/results" method="post">
+        <button class="btn btn-primary w3-button w3-blue" onclick="move()" type="submit">Get my recommendations!</button>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Lamont Media Lab
+{% endblock %}
+
+{% block main %}
+
+    <h1 style="font-family: 'Carrois Gothic', sans-serif; font-size: 40px">Lamont Media Lab</h1>
+
+    <img src="/static/images/lamontmedialab.jpg" width="600" height="400">
+
+    <h6>Source: https://library.harvard.edu/spaces</h6>
+
+    <br><br>
+    <div id="mapid"></div>
+    <script>
+
+        var mymap = L.map('mapid').setView([42.3745246, -71.1172788], 15);
+
+        const tileUrl = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}';
+        const tiles = L.tileLayer(tileUrl, { attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox/streets-v11',
+            accessToken: 'pk.eyJ1IjoiYWxpc29uaDg4IiwiYSI6ImNrM2x6bzFsdzBtdXozanFxMWl1ajN5azYifQ.EzFW94EKtRoHCRyaaObjMg'
+        });
+
+        tiles.addTo(mymap);
+
+        const lamontmedialab = L.marker([42.372833, -71.115255]).addTo(mymap);
+        lamontmedialab.bindPopup("<b>Lamont Media Lab</b><br>Quiet noise level<br>rolling chairs<br>Food available<br>Has group study space").openPopup();
+
+    </script>
+
+    <br><br>
+    <form action="/browse">
+        <button class="btn btn-primary w3-button w3-blue" type="submit">Browse Another Space</button>
+    </form>
+
+{% endblock %}

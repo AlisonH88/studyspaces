@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+    <head>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- documentation at http://getbootstrap.com/docs/4.1/, alternative themes at https://bootswatch.com/ -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- https://favicon.io/emoji-favicons/money-mouth-face/ -->
+        <link href="/static/favicon.ico" rel="icon">
+
+        <link href="/static/styles.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+        <!--Google font-->
+        <link href="https://fonts.googleapis.com/css?family=Carrois+Gothic&display=swap" rel="stylesheet">
+
+        <!-- Leaflet CSS-->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+
+        <!--Leaflet JavaScript-->
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+
+        <title>studyspaces {% block title %}{% endblock %}</title>
+
+    </head>
+
+    <body class="w3-black">
+        <nav class="navbar navbar-expand-md navbar-light bg-white border">
+
+            <a class="navbar-brand" href="/"><img src="/static/images/sslogo.png" style="width:150px;height:6opx;border:0;"></a>
+            <!--<a class="navbar-brand" href="/"><span class="blue">study</span><span class="purple">spaces</span></a>-->
+            <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+                  <ul class="navbar-nav ml-auto mt-2">
+                        <li class="nav-item"><a class="nav-link" href="/">Take the Quiz &nbsp;</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/browse">Browse Spaces</a></li>
+                  </ul>
+            </div>
+        </nav>
+
+        <main class="container p-5">
+            {% block main %}{% endblock %}
+        </main>
+
+    <!-- Navbar  -->
+        <!--<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">-->
+        <!--    <a href="#takethequiz" class="w3-bar-item w3-button w3-padding-large w3-black">-->
+        <!--        <i class="fa fa-home w3-xxlarge"></i>-->
+        <!--        <p>TAKE THE QUIZ</p>-->
+        <!--    </a>-->
+        <!--    <a href="#browsespaces" class="w3-bar-item w3-button w3-padding-large w3-hover-black">-->
+        <!--        <i class="fa fa-user w3-xxlarge"></i>-->
+        <!--        <p>BROWSE SPACES</p>-->
+        <!--    </a>-->
+        <!--    <a href="#info" class="w3-bar-item w3-button w3-padding-large w3-hover-black">-->
+        <!--        <i class="fa fa-eye w3-xxlarge"></i>-->
+        <!--        <p>INFO</p>-->
+        <!--    </a>-->
+        <!--</nav>-->
+
+        <!-- Navbar on small screens (Hidden on medium and large screens) -->
+    <!--    <div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">-->
+    <!--      <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">-->
+    <!--        <a href="#" class="w3-bar-item w3-button" style="width:25% !important">TAKE THE QUIZ</a>-->
+    <!--        <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">BROWSE SPACES</a>-->
+    <!--        <a href="#photos" class="w3-bar-item w3-button" style="width:25% !important">INFO</a>-->
+    <!--      </div>-->
+    <!--    </div>-->
+
+
+     <!-- About Section -->
+     <div class="w3-stretch w3-justify w3-text-grey" id="about">
+         <div class="w3-row w3-center w3-padding-16 w3-section w3-light-grey">
+             <div class="w3-quarter w3-section">
+                 <span class="w3-xlarge">5+</span><br>
+                     Filters
+             </div>
+             <div class="w3-quarter w3-section">
+                 <span class="w3-xlarge">15+</span><br>
+                    Study Spaces
+             </div>
+             <div class="w3-quarter w3-section">
+                 <span class="w3-xlarge">50+</span><br>
+                    Hours Studied
+             </div>
+             <div class="w3-quarter w3-section">
+                 <span class="w3-xlarge">100+</span><br>
+                    Happy Students
+             </div>
+          </div>
+     <!-- End About Section -->
+     </div>
+
+    <br>
+
+    <!-- Contact Section -->
+    <div class="w3-content w3-text-grey" id="contact">
+        <h2 class="w3-text-light-grey">Contact Us</h2>
+        <hr style="width:200px" class="w3-opacity">
+
+        <div class="w3-section">
+            <p><i class="fa fa-map-marker fa-fw w3-text-white w3-xxlarge"></i> Cambridge, MA</p>
+            <p><i class="fa fa-envelope fa-fw w3-text-white w3-xxlarge"> </i> Email:
+                <a href="mailto:katehazlett@college.harvard.edu?subject=Contact Kate: studyspaces">katehazlett@college.harvard.edu</a>
+                and
+                <a href="mailto:ahu@college.harvard.edu?subject=Contact Alison: studyspaces">ahu@college.harvard.edu</a>
+            </p>
+        </div><br>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p class="w3-medium text-center text-muted">Created by Kate and Alison. Contact us with comments and suggestions!</p>
+    </footer>
+
+    </body>
+
+</html>

@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Seating
+{% endblock %}
+
+{% block main %}
+
+    <h3>Your preferred seating is {{ seating }}.</h3>
+    <br>
+    <h5>
+        <div class="w3-container">
+            <div class="w3-light-grey w3-round-xlarge">
+                <div id="myBar" class="w3-container w3-blue w3-round-xlarge" style="width:50%">50%
+                </div>
+            </div>
+        </div>
+    </h5>
+    <br>
+    <h2>Do you want a space to study as a group?</h2>
+    <br>
+    <form action="/groupstudy" method="post">
+        <div class="form-group">
+            <select class="form-control" name="groupstudy">
+                <option disabled selected value="">Group Study</option>
+
+                        <option>Yes</option>
+                        <option>No</option>
+
+            </select>
+
+        <button class="btn btn-primary w3-button w3-blue" onclick="move()" type="submit">OK!</button>
+    </form>
+
+    <script>
+        function move() {
+            var elem = document.getElementById("myBar");
+            var width = 50;
+            var id = setInterval(frame, 10);
+            function frame() {
+                if (width >= 75) {
+                    clearInterval(id);
+                }
+                else {
+                    width++;
+                    elem.style.width = width + '%';
+                    elem.innerHTML = width * 1  + '%';
+                }
+            }
+        }
+    </script>
+    <!--<h3>Your recommended study spaces are:</h3>-->
+    <!--<body>-->
+    <!--    {% for x in spaces %}-->
+
+    <!--        {{ x }}-->
+    <!--        <br>-->
+
+    <!--    {% endfor %}-->
+    <!--</body>-->
+
+{% endblock %}
+

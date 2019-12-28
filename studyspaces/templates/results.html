@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block main %}
+
+    <h2 style="font-family: 'Carrois Gothic', sans-serif; font-size: 40px">Your recommended <span class="blue">study</span><span class="purple">spaces</span> are:</h2>
+    <br>
+    <body>
+        {% for x in spaces %}
+
+            {{ x }}
+            <br>
+
+        {% endfor %}
+    </body>
+    <br><br>
+    <form action="/browse">
+        <button class="btn btn-primary w3-button w3-blue" type="submit">Browse Spaces</button>
+    </form>
+
+{% endblock %}

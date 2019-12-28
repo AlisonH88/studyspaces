@@ -1,0 +1,292 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Browse
+{% endblock %}
+
+{% block main %}
+
+    <h2 style="font-family: 'Carrois Gothic', sans-serif; font-size: 40px">Available <span class="blue">study</span><span class="purple">spaces</span>:</h2>
+    <br>
+    <body>
+        <table align="center">
+            <tr>
+                <th style="color: #63ABAA">Name</th>
+                <th style="color: #7363AB">Distance From You (miles)</th>
+            </tr>
+            <tr>
+                <th><a href="/cabot">Cabot Science Library</a><br></th>
+                <th><div id="cabot"></div></th>
+            </tr>
+            <tr>
+                <th><a href="/capitalonecafe">Capital One Cafe</a><br></th>
+                <th><div id="capitalonecafe"></div></th>
+            </tr>
+            <tr>
+                <th><a href="/flour">Flour Bakery</a><br></th>
+                <th><div id="flour"></div></th>
+            </tr>
+            <tr>
+                <th><a href="/artmuseum">Harvard Art Museums Courtyard</a><br></th>
+                <th><div id="artmuseum"></div></th>
+            </tr>
+            <tr>
+                <th><a href="/lamontpoetryroom">Lamont - Woodberry Poetry Room</a><br></th>
+                <th><div id="lamontpoetryroom"></div></th>
+            </tr>
+            <tr>
+                <th><a href="/lamontcafe">Lamont Cafe</a><br></th>
+                <th><div id="lamontcafe"></div></th>
+            </tr>
+            <tr>
+                <th><a href="/lamontmedialab">Lamont Media Lab</a><br></th>
+                <th><div id="lamontmedialab"></div></th>
+            </tr>
+            <tr>
+                <th><a href="/lamontnooks">Lamont Nooks</a><br></th>
+                <th><div id="lamontnooks"></div></th>
+            </tr>
+            <tr>
+                <th><a href="/lawschoollibrary">Law School Library</a><br></th>
+                <th><div id="lawschoollibrary"></div></th>
+            </tr>
+            <tr>
+                <th><a href="/memchurch">Memorial Church Basement</a><br></th>
+                <th><div id="memchurch"></div></th>
+            </tr>
+            <tr>
+                <th><a href="/peets">Peet's Coffee</a><br></th>
+                <th><div id="peets"></div></th>
+            </tr>
+            <tr>
+                <th><a href="/smith10">Smith 10th Floor</a><br></th>
+                <th><div id="smith10"></div></th>
+            </tr>
+            <tr>
+                <th><a href="/smithcc">Smith Collaborative Commons</a><br></th>
+                <th><div id="smithcc"></div></th>
+            </tr>
+            <tr>
+                <th><a href="/starbucks">Starbucks</a><br></th>
+                <th><div id="starbucks"></div></th>
+            </tr>
+            <tr>
+                <th><a href="/straus">Straus Common Room</a><br></th>
+                <th><div id="straus"></div></th>
+            </tr>
+            <tr>
+                <th><a href="/tatte">Tatte</a><br></th>
+                <th><div id="tatte"></div></th>
+            </tr>
+            <tr>
+                <th><a href="/thayer">Thayer Common Room</a><br></th>
+                <th><div id="thayer"></div></th>
+            </tr>
+            <tr>
+                <th><a href="/widenerloker">Widener - Loker Reading Room</a><br></th>
+                <th><div id="widenerloker"></div></th>
+            </tr>
+            <tr>
+                <th><a href="/widenerphillips">Widener - Phillips Reading Room</a><br></th>
+                <th><div id="widenerphillips"></div></th>
+            </tr>
+        </table>
+        <br><br>
+        <table align="center">
+            <tr>
+                <th>Your Latitude</th>
+                <th style="width: 25px"></th>
+                <th>Your Longitude</th>
+            </tr>
+            <tr>
+                <th style="font-weight: normal"><div id="lat"></div></th>
+                <th style="width: 25px"s></th>
+                <th style="font-weight: normal"><div id="lon"></div></th>
+            </tr>
+        </table>
+    </body>
+
+    <p id="cabot"></p>
+    <p id="capitalonecafe"></p>
+    <p id="flour"></p>
+    <p id="artmuseum"></p>
+    <p id="lamontpoetryroom"></p>
+    <p id="lamontcafe"></p>
+    <p id="lamontmedialab"></p>
+    <p id="lamontnooks"></p>
+    <p id="lawschoollibrary"></p>
+    <p id="memchurch"></p>
+    <p id="smithcc"></p>
+    <p id="smith10"></p>
+    <p id="starbucks"></p>
+    <p id="straus"></p>
+    <p id="tatte"></p>
+    <p id="thayer"></p>
+    <p id="widenerloker"></p>
+    <p id="widenerphillips"></p>
+    <p id="lat"></p><br>
+    <p id="lon"></p>
+
+    <div id="mapid"></div>
+    <script>
+
+        var mymap = L.map('mapid').setView([42.3745246, -71.1172788], 15);
+
+        const tileUrl = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}';
+        const tiles = L.tileLayer(tileUrl, { attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox/streets-v11',
+            accessToken: 'pk.eyJ1IjoiYWxpc29uaDg4IiwiYSI6ImNrM2x6bzFsdzBtdXozanFxMWl1ajN5azYifQ.EzFW94EKtRoHCRyaaObjMg'
+        });
+
+        tiles.addTo(mymap);
+
+        // marker for user's current position
+        lat = 0;
+        lon = 0;
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                lat = position.coords.latitude;
+                lon = position.coords.longitude;
+                var marker = L.marker([lat, lon]).addTo(mymap);
+                marker.bindPopup("<b>You are here.</b><br>").openPopup();
+                document.getElementById("lat").innerHTML = lat;
+                document.getElementById("lon").innerHTML = lon;
+
+                function getDistance(origin, destination) {
+                    // return distance in meters
+                    var lon1 = toRadian(origin[1]),
+                        lat1 = toRadian(origin[0]),
+                        lon2 = toRadian(destination[1]),
+                        lat2 = toRadian(destination[0]);
+
+                    var deltaLat = lat2 - lat1;
+                    var deltaLon = lon2 - lon1;
+
+                    var a = Math.pow(Math.sin(deltaLat/2), 2) + Math.cos(lat1) * Math.cos(lat2) * Math.pow(Math.sin(deltaLon/2), 2);
+                    var c = 2 * Math.asin(Math.sqrt(a));
+                    var EARTH_RADIUS = 6371;
+                    return c * EARTH_RADIUS * 1000;
+                }
+                function toRadian(degree) {
+                    return degree*Math.PI/180;
+                }
+
+                var cabotdistance = Math.round(getDistance([lat, lon], [42.376353, -71.1169995]) / 1609.344 * 100) / 100
+                document.getElementById("cabot").innerHTML = cabotdistance;
+
+                var capitolonedistance = Math.round(getDistance([lat, lon], [42.372941, -71.119640]) / 1609.344 * 100) / 100
+                document.getElementById("capitalonecafe").innerHTML = capitolonedistance;
+
+                var flourdistance = Math.round(getDistance([lat, lon], [42.373048, -71.122356]) / 1609.344 * 100) / 100
+                document.getElementById("flour").innerHTML = flourdistance;
+
+                var artdistance = Math.round(getDistance([lat, lon], [42.374154, -71.114209]) / 1609.344 * 100) / 100
+                document.getElementById("artmuseum").innerHTML = artdistance;
+
+                var lamontpoetrydistance = Math.round(getDistance([lat, lon], [42.372763, -71.115566]) / 1609.344 * 100) / 100
+                document.getElementById("lamontpoetryroom").innerHTML = lamontpoetrydistance;
+
+                var lamontcafedistance = Math.round(getDistance([lat, lon], [42.372899, -71.115552]) / 1609.344 * 100) / 100
+                document.getElementById("lamontcafe").innerHTML = lamontcafedistance;
+
+                var lamontmedialabdistance = Math.round(getDistance([lat, lon], [42.372833, -71.115255]) / 1609.344 * 100) / 100
+                document.getElementById("lamontmedialab").innerHTML = lamontmedialabdistance;
+
+                var lamontnooksdistance = Math.round(getDistance([lat, lon], [42.372737, -71.115373]) / 1609.344 * 100) / 100
+                document.getElementById("lamontnooks").innerHTML = lamontnooksdistance;
+
+                var lawschooldistance = Math.round(getDistance([lat, lon], [42.377982, -71.118565]) / 1609.344 * 100) / 100
+                document.getElementById("lawschoollibrary").innerHTML = lawschooldistance;
+
+                var memchurchdistance = Math.round(getDistance([lat, lon], [42.374955, -71.116086]) / 1609.344 * 100) / 100
+                document.getElementById("memchurch").innerHTML = memchurchdistance;
+
+                var peetsdistance = Math.round(getDistance([lat, lon], [42.372616, -71.120660]) / 1609.344 * 100) / 100
+                document.getElementById("peets").innerHTML = peetsdistance;
+
+                var smith10distance = Math.round(getDistance([lat, lon], [42.372593, -71.118716]) / 1609.344 * 100) / 100
+                document.getElementById("smith10").innerHTML = smith10distance;
+
+                var smithdistance = Math.round(getDistance([lat, lon], [42.3728791, -71.1184495]) / 1609.344 * 100) / 100
+                document.getElementById("smithcc").innerHTML = smithdistance;
+
+                var starbucksdistance = Math.round(getDistance([lat, lon], [42.373355, -71.119240]) / 1609.344 * 100) / 100
+                document.getElementById("starbucks").innerHTML = starbucksdistance;
+
+                var strausdistance = Math.round(getDistance([lat, lon], [42.374136, -71.118599]) / 1609.344 * 100) / 100
+                document.getElementById("straus").innerHTML = strausdistance;
+
+                var tattedistance = Math.round(getDistance([lat, lon], [42.372701, -71.116958]) / 1609.344 * 100) / 100
+                document.getElementById("tatte").innerHTML = tattedistance;
+
+                var thayerdistance = Math.round(getDistance([lat, lon], [42.375023, -71.116749]) / 1609.344 * 100) / 100
+                document.getElementById("thayer").innerHTML = thayerdistance;
+
+                var lamontnooksdistance = Math.round(getDistance([lat, lon], [42.372737, -71.115373]) / 1609.344 * 100) / 100
+                document.getElementById("widenerloker").innerHTML = lamontnooksdistance;
+
+                var lamontmedialabdistance = Math.round(getDistance([lat, lon], [42.372833, -71.115255]) / 1609.344 * 100) / 100
+                document.getElementById("widenerphillips").innerHTML = lamontmedialabdistance;
+
+            }
+        )}
+
+        // markers for study spaces
+        const smith = L.marker([42.3728791, -71.1184495]).addTo(mymap);
+        smith.bindPopup("<b>Smith Collaborative Commons</b><br>Moderate noise level<br>Couches, normal chairs<br>Food available<br>Has group study space").openPopup();
+
+        const widener = L.marker([42.373721, -71.116397]).addTo(mymap);
+        widener.bindPopup("<b>Widener</b><br>Quiet noise level<br>Normal chairs<br>No food available<br>No group study space").openPopup();
+
+        const lamontCafe = L.marker([42.372899, -71.115552]).addTo(mymap);
+        lamontCafe.bindPopup("<b>Lamont Cafe</b><br>Quiet noise level<br>Couches, normal chairs<br>Food available<br>Has group study space").openPopup();
+
+        const lamont = L.marker([42.372763, -71.115566]).addTo(mymap);
+        lamont.bindPopup("<b>Lamont - Woodberry Poetry Room</b><br>Moderate noise level<br>Normal chairs<br>Food available<br>Has group study space").openPopup();
+
+        const thayer = L.marker([42.375023, -71.116749]).addTo(mymap);
+        thayer.bindPopup("<b>Thayer Common Room</b><br>Moderate noise level<br>Couches<br>No food available<br>Has group study space").openPopup();
+
+        const cabot = L.marker([42.376353, -71.1169995]).addTo(mymap);
+        cabot.bindPopup("<b>Cabot Science Library</b><br>Moderate noise level<br>Couches, normal chairs, rolling chairs<br>Food available<br>Has group study space").openPopup();
+
+        const straus = L.marker([42.374136, -71.118599]).addTo(mymap);
+        straus.bindPopup("<b>Straus Common Room</b><br>Moderate noise level<br>Couches<br>No food available<br>Has group study space").openPopup();
+
+        const starbucks = L.marker([42.373355, -71.119240]).addTo(mymap);
+        starbucks.bindPopup("<b>Starbucks</b><br>Loud noise level<br>Normal chairs<br>Food available<br>No group study space").openPopup();
+
+        const tatte = L.marker([42.372701, -71.116958]).addTo(mymap);
+        tatte.bindPopup("<b>Tatte</b><br>Loud noise level<br>Normal chairs<br>Food available<br>No group study space").openPopup();
+
+        const memchurch = L.marker([42.374955, -71.116086]).addTo(mymap);
+        memchurch.bindPopup("<b>Memorial Church Basement</b><br>Moderate noise level<br>Rolling chairs<br>No food available<br>Has group study space").openPopup();
+
+        const art = L.marker([42.374154, -71.114209]).addTo(mymap);
+        art.bindPopup("<b>Harvard Art Museums Courtyard</b><br>Moderate noise level<br>Normal chairs<br>Food available<br>No group study space").openPopup();
+
+        const flour = L.marker([42.373048, -71.122356]).addTo(mymap);
+        flour.bindPopup("<b>Flour</b><br>Loud noise level<br>Normal chairs<br>Food available<br>No group study space").openPopup();
+
+        const lawschool = L.marker([42.377982, -71.118565]).addTo(mymap);
+        lawschool.bindPopup("<b>Law School Library</b><br>Quiet noise level<br>Normal chairs<br>No food available<br>No group study space").openPopup();
+
+        const capitalone = L.marker([42.372941, -71.119640]).addTo(mymap);
+        capitalone.bindPopup("<b>Capital One Cafe</b><br>Moderate noise level<br>Normal chairs<br>Food available<br>Has group study space").openPopup();
+
+        const peets = L.marker([42.372616, -71.120660]).addTo(mymap);
+        peets.bindPopup("<b>Peet's Coffee</b><br>Loud noise level<br>Normal chairs<br>Food available<br>No group study space").openPopup();
+
+        const smithtenth = L.marker([42.372593, -71.118716]).addTo(mymap);
+        smithtenth.bindPopup("<b>Smith 10th Floor</b><br>Quiet noise level<br>Couches<br>Food available<br>Has group study space").openPopup();
+
+        const lamontnooks = L.marker([42.372737, -71.115373]).addTo(mymap);
+        lamontnooks.bindPopup("<b>Lamont Nooks</b><br>Quiet noise level<br>normal chairs<br>Food available<br>Has group study space").openPopup();
+
+        const lamontmedialab = L.marker([42.372833, -71.115255]).addTo(mymap);
+        lamontmedialab.bindPopup("<b>Lamont Media Lab</b><br>Quiet noise level<br>rolling chairs<br>Food available<br>Has group study space").openPopup();
+
+    </script>
+
+{% endblock %}
