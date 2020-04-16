@@ -1,10 +1,10 @@
 ### studyspaces documentation and directions ###
 
 To execute the program, run the following commands:
-Execute cd ~/
-Execute cd project
-Execute cd project
-Execute flask run
+(1) Execute cd ~/
+(2) Execute cd project
+(3) Execute cd project
+(4) Execute flask run. 
 Then, click on the link that shows up in the terminal.
 
 Once on the homepage, there is a place to input the user's name, a map of all of the study spaces with their locations and features,
